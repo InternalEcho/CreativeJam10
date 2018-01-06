@@ -21,7 +21,6 @@ public class Player : MonoBehaviour {
         float z = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(x, 0f, z);
 
-        this.transform.LookAt(this.transform.position + direction);
         this.transform.Translate(direction * playerSpeed, Space.World);
     }
 }
