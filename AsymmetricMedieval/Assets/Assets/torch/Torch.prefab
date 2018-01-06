@@ -309,6 +309,7 @@ MonoBehaviour:
   Fumee: {fileID: 100010}
   MaxLightIntensity: 3
   IntensityLight: 0
+  FireCrack: {fileID: 8300000, guid: 1616284a520e71547b448204536c0bfe, type: 3}
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
