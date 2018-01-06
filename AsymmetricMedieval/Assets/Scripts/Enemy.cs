@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	public float detectionRange = 5.0f;
+	public GameObject Vision;
+	public GameObject Player;
 
-	public Transform detectionShape
-
-	public void FollowPlayer (){
-		if (getInRange ()) {
-			
-		}
+	void move(){
+		//rotate first.
+		transform.LookAt(Player.transform);
+		//move.
+		transform.Translate(Vision.GetComponent<Detection>().playerdirection().normalized * Time.deltaTime, Space.World);
 	}
 
 	// Use this for initialization
@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(Vision.GetComponent<Detection>().canMove){
+			move();
+		}	
 	}
 }
