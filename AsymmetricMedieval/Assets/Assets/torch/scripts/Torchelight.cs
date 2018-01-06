@@ -10,15 +10,19 @@ public class Torchelight : MonoBehaviour {
 	public GameObject Fumee;
 	public float MaxLightIntensity;
 	public float IntensityLight;
+    public AudioClip FireCrack;
 
     private GameObject Player;
     private bool lightUp;
+    private AudioSource audioSource;
 
-	void Start ()
+    void Start ()
     {
         IntensityLight = 0;
         lightUp = false;
-        Player = GameObject.FindGameObjectWithTag("player");
+        audioSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        audioSource.clip = FireCrack;
+        Player = GameObject.FindGameObjectWithTag("Player");
 
         TorchLight.GetComponent<Light>().intensity=IntensityLight;
 		MainFlame.GetComponent<ParticleSystem>().emissionRate=IntensityLight*20f;
@@ -43,10 +47,13 @@ public class Torchelight : MonoBehaviour {
 
     private bool verifyPlayerIsClose()
     {
-        if ((Player.transform.position - this.transform.position).sqrMagnitude < 3 * 3)
+        if ((Player.transform.position - this.transform.position).sqrMagnitude < 5 * 3)
         {
             // Set the torch to on
             IntensityLight = MaxLightIntensity;
+            // Play fire cracking sound
+            audioSource.Play();
+
             return true;
         }
         return false;
