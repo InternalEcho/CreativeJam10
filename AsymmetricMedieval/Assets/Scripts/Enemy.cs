@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+	public float detectionRange = 5.0f;
+
+	public Transform detectionShape
+
+	public void FollowPlayer (){
+		if (getInRange ()) {
+			
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 		
