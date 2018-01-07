@@ -17,6 +17,11 @@ public class Enemy : MonoBehaviour {
 	public float jumpDistance;
 	public bool inDamageRange;
 
+	public int health;
+	public int healthIncrement;
+	public bool hasDied;
+	public float damagingRate;
+
 	public Vector3 playerdirection(){
 		Vector3 direction = player.transform.position - transform.position;
 		return direction;
@@ -43,16 +48,8 @@ public class Enemy : MonoBehaviour {
 			}
 			seeWallOnce = false;
 		} else if (target.collider.gameObject.layer == 8) {
-			if(!seeWallOnce)
-				StartCoroutine(AttentionSpan ());
 			canMove = false;
 		}
-	}
-
-	IEnumerator AttentionSpan(){
-		canMove = true;
-		yield return new WaitForSeconds (2.0f);
-		seeWallOnce = true;
 	}
 
 	void OnDrawGizmos(){
@@ -63,27 +60,51 @@ public class Enemy : MonoBehaviour {
 	void move(){
 		//rotate first.
 		transform.LookAt(player.transform);
-
-        //move.
+		//move.
         Vector3 direction = playerdirection();
         direction.y = 0;
 		transform.Translate(direction.normalized * enemySpeed, Space.World);
 
 	}
 
+	IEnumerator damageRate(){
+		yield return new WaitForSeconds (damagingRate);
+		damagePlayer ();
+	}
+		
+	void damagePlayer(){
+		player.GetComponent<Player> ().LoseHp ();
+	}
+
+	public void loseHP(){
+		health -= healthIncrement;
+	}
+
+	public void checkHP(){
+		if(health <= 0){
+			hasDied = true;
+			Object.Destroy(this.gameObject, 5.0f);
+			//Instantiate(
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 		seeWallOnce = true;
 		inDamageRange = false;
+		hasDied = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-
+		checkHP ();
 		DetectPlayer ();
 		if(canMove){
 			move();
+		}
+		if (inDamageRange) {
+			StartCoroutine (damageRate ());
 		}
 		animate ();
 	}
@@ -91,6 +112,6 @@ public class Enemy : MonoBehaviour {
 	void animate(){
 		animator.SetBool("walk", canMove);
 		animator.SetBool("jump", inDamageRange);
-		//animator.SetBool ("die", hasDied);
+		animator.SetBool ("die", hasDied);
 	}
 }
