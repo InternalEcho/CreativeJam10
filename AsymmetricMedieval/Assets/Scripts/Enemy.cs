@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour {
 	public int health;
 	public int healthIncrement;
 	public bool hasDied;
+	public float damagingRate;
 
 	public Vector3 playerdirection(){
 		Vector3 direction = player.transform.position - transform.position;
@@ -58,9 +59,14 @@ public class Enemy : MonoBehaviour {
 		transform.Translate(Vector3.Project(playerdirection().normalized, transform.forward) * Time.deltaTime, Space.World);
 
 	}
+
+	IEnumerator damageRate(){
+		yield return new WaitForSeconds (damagingRate);
+		damagePlayer ();
+	}
 		
 	void damagePlayer(){
-		//player.GetComponent<Player> ().loseHp ();
+		player.GetComponent<Player> ().LoseHp ();
 	}
 
 	public void loseHP(){
@@ -89,6 +95,9 @@ public class Enemy : MonoBehaviour {
 		DetectPlayer ();
 		if(canMove){
 			move();
+		}
+		if (inDamageRange) {
+			StartCoroutine (damageRate ());
 		}
 		animate ();
 	}

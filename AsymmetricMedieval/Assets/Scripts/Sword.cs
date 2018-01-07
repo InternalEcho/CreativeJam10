@@ -42,11 +42,19 @@ public class Sword : MonoBehaviour {
         }
     }
 
-	void OnCollisionEnter(Collision collision){
-		foreach (ContactPoint contact in collision.contacts)
-		{
-			Debug.DrawRay(contact.point, contact.normal, Color.white);
-		}
+//	void OnCollisionEnter(Collision collision){
+//		foreach (ContactPoint contact in collision.contacts)
+//		{
+//			Debug.DrawRay(contact.point, contact.normal, Color.white);
+//		}
+//		Debug.Log ("Collision!");
+//		if (collision.gameObject.CompareTag("Enemy")){
+//			Debug.Log ("Hit!");
+//			collision.gameObject.GetComponent<Enemy>().loseHP();
+//		}
+//	}
+
+	void OnTriggerEnter(Collider collision){
 		Debug.Log ("Collision!");
 		if (collision.gameObject.CompareTag("Enemy")){
 			Debug.Log ("Hit!");
