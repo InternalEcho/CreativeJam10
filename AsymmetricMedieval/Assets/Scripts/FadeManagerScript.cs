@@ -69,7 +69,7 @@ public class FadeManagerScript : MonoBehaviour {
     {
         FadeToClear();
 
-        if (fadeImage.color.a <= 0.1f)
+        if (fadeImage.color.a <= 0.07f)
         {
             fadeImage.color = Color.clear;
             fadeImage.enabled = false;
