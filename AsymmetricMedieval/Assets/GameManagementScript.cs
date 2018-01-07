@@ -97,10 +97,17 @@ public class GameManagementScript : MonoBehaviour {
     public void GoToGame()
     {
         Debug.Log("Play Game");
-        state = StateType.GAME;
+        StartCoroutine(BeginGame());
+    }
+
+    IEnumerator BeginGame()
+    {
         resetAll();
+        //FadeManagerScript.Instance.flagBlack = true;
+        state = StateType.GAME;
         SceneManager.LoadScene(1);
         FadeManagerScript.Instance.flagClear = true;
+        yield return null;
     }
 
     public void GoToDead()
@@ -141,13 +148,20 @@ public class GameManagementScript : MonoBehaviour {
         gameOverScreen.GetComponent<Image>().enabled = false;
         gameOverText.enabled = false;
         endButtons.SetActive(false);
+        FadeManagerScript.Instance.reset();
         StopAllCoroutines();
     }
 
     public void ReloadMain()
     {
         Debug.Log("Going To Main");
-        SceneManager.LoadScene(0);
+        FadeManagerScript.Instance.fadeImage.enabled = true;
+        if (FadeManagerScript.Instance.fadeImage.enabled == true)
+            Debug.Log("oui");
+
+        else
+            Debug.Log("non");
+        FadeManagerScript.Instance.flagClear = true;
         GoToMain();
     }
 }

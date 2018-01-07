@@ -39,6 +39,7 @@ public class FadeManagerScript : MonoBehaviour {
     {
         if (flagClear)
         {
+            fadeImage.enabled = true;
             Fade();
         }
         else if (flagBlack)
@@ -51,6 +52,7 @@ public class FadeManagerScript : MonoBehaviour {
     public void Blacken()
     {
         FadeToBlack();
+        Debug.Log(fadeImage.color.a);
         if (fadeImage.color.a >= 0.95f)
         {
             toBlackOver = true;
@@ -60,7 +62,7 @@ public class FadeManagerScript : MonoBehaviour {
             Debug.Log("Loading game!");
             if (GameManagementScript.Instance.state == GameManagementScript.StateType.MAIN)
             {
-                GameManagementScript.Instance.GoToGame(); //HARDCODE
+            //    GameManagementScript.Instance.GoToGame(); //HARDCODE
             }
             else if (GameManagementScript.Instance.state == GameManagementScript.StateType.DEAD)
             {
@@ -98,13 +100,13 @@ public class FadeManagerScript : MonoBehaviour {
         flagBlack = true;
     }
 
-    void reset()
+    public void reset()
     {
 
-        flagClear = false;
+        flagClear = true;
         flagBlack = false;
-
         toBlackOver = false;
+        fadeImage.color = Color.black;
     }
 
 }
