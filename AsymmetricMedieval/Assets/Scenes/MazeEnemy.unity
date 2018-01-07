@@ -1876,6 +1876,16 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1593433358}
+    - target: {fileID: 114606876361859510, guid: 781e95060dc354789be150dc9fe096ef,
+        type: 2}
+      propertyPath: health
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114606876361859510, guid: 781e95060dc354789be150dc9fe096ef,
+        type: 2}
+      propertyPath: healthIncrement
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 781e95060dc354789be150dc9fe096ef, type: 2}
   m_IsPrefabParent: 0
@@ -4095,6 +4105,8 @@ MonoBehaviour:
   animator: {fileID: 1288764851}
   jumpDistance: 10
   inDamageRange: 0
+  health: 0
+  healthIncrement: 0
 --- !u!23 &970629508
 MeshRenderer:
   m_ObjectHideFlags: 0

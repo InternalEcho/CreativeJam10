@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour {
 	public float jumpDistance;
 	public bool inDamageRange;
 
+	public int health;
+	public int healthIncrement;
+
 	public Vector3 playerdirection(){
 		Vector3 direction = player.transform.position - transform.position;
 		return direction;
@@ -65,6 +68,17 @@ public class Enemy : MonoBehaviour {
 		
 	void damagePlayer(){
 		//player.GetComponent<Player> ().loseHp ();
+	}
+
+	public void loseHP(){
+		health -= healthIncrement;
+	}
+
+	public void checkHP(){
+		if(health =< 0){
+			Object.Destroy(this.gameObject, 0.0f);
+			//Instantiate(
+		}
 	}
 
 	// Use this for initialization
