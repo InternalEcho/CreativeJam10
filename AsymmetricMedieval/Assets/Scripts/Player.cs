@@ -5,9 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public float playerSpeed, playerRotateSpeed, maxHp, hp;
     public AudioClip WalkingClip, DeathClip;
+    private float TimeBetweenAudio;
+    public AudioClip[] RandomAudio;
 
     private AudioSource walkAudio;
     private AudioSource deathAudio;
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start () {
@@ -16,6 +19,9 @@ public class Player : MonoBehaviour {
         walkAudio.clip = WalkingClip;
         deathAudio = (gameObject.AddComponent<AudioSource>() as AudioSource);
         deathAudio.clip = DeathClip;
+
+        TimeBetweenAudio = Random.Range(15, 40);
+        this.audioSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
     }
 	
 	// Update is called once per frame
@@ -23,7 +29,22 @@ public class Player : MonoBehaviour {
         Move();
         Rotate();
         CheckHp();
+        PlayRandomAudio();
 	}
+
+    void PlayRandomAudio()
+    {
+        // Generate a sound every random time
+        TimeBetweenAudio -= Time.deltaTime;
+        // Debug.Log(TimeBetweenAudio);
+        if (TimeBetweenAudio <= 0)
+        {
+            TimeBetweenAudio = Random.Range(15, 40);
+            audioSource.clip = RandomAudio[Random.Range(0, RandomAudio.Length - 1)];
+
+            audioSource.Play();
+        }
+    }
 
     void Move()
     {
@@ -53,6 +74,11 @@ public class Player : MonoBehaviour {
         var rotate = Input.GetAxis("RotateHorizontal");
 
         transform.Rotate(0, rotate * playerRotateSpeed, 0);
+    }
+
+    void PlayRandomCreepySound()
+    {
+
     }
 
     void CheckHp()
