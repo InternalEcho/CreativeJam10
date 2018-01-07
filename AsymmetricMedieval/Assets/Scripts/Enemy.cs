@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour {
 	public RaycastHit hit;
 	public RaycastHit target;
 	public bool canMove;
+	public bool seeWallOnce;
 
 	public Vector3 playerdirection(){
 		Vector3 direction = player.transform.position - transform.position;
@@ -25,17 +26,18 @@ public class Enemy : MonoBehaviour {
 		if (target.transform.CompareTag ("Player")) {
 			Debug.Log ("work");
 			canMove = true;
+			seeWallOnce = false;
 		} else if (target.collider.gameObject.layer == 8) {
-			AttentionSpan ();
+			if(!seeWallOnce)
+				StartCoroutine(AttentionSpan ());
 			canMove = false;
 		}
-		hit = target;
 	}
 
 	IEnumerator AttentionSpan(){
-		Debug.Log (Time.time);
-		yield return new WaitForSeconds (3.0f);
-		Debug.Log (Time.time);
+		move ();
+		yield return new WaitForSeconds (2.0f);
+		seeWallOnce = true;
 	}
 
 	void OnDrawGizmos(){
@@ -52,7 +54,7 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		seeWallOnce = true;
 	}
 
 	// Update is called once per frame
