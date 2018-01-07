@@ -17,6 +17,7 @@ public class Sword : MonoBehaviour {
         canAttack = true;
         displaySword.transform.GetComponent<Renderer>().enabled = true;
         this.gameObject.transform.GetChild(0).gameObject.transform.GetComponent<Renderer>().enabled = false;
+        this.gameObject.transform.GetComponent<Collider>().enabled = false;
         slashingSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
         slashingSource.clip = slashingSound;
         stabbingSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
@@ -42,6 +43,7 @@ public class Sword : MonoBehaviour {
     {
         displaySword.transform.GetComponent<Renderer>().enabled = false;
         this.gameObject.transform.GetChild(0).gameObject.transform.GetComponent<Renderer>().enabled = true;
+        this.gameObject.transform.GetComponent<Collider>().enabled = true;
 
         switch (randomAttack)   // 0 = stab, 1 = horizontal swing, 2 = diagonal swing
         {
@@ -66,6 +68,8 @@ public class Sword : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
         displaySword.transform.GetComponent<Renderer>().enabled = true;
         this.gameObject.transform.GetChild(0).gameObject.transform.GetComponent<Renderer>().enabled = false;
+        this.gameObject.transform.GetComponent<Collider>().enabled = false;
+
         canAttack = true;
     }
 
