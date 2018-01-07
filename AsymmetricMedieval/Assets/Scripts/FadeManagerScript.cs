@@ -31,7 +31,6 @@ public class FadeManagerScript : MonoBehaviour {
     {
         flagClear = true;
         flagBlack = false;
-
         toBlackOver = false;
     }
 
@@ -46,7 +45,7 @@ public class FadeManagerScript : MonoBehaviour {
         }
     }
 
-    void Blacken()
+    public void Blacken()
     {
         FadeToBlack();
         if (fadeImage.color.a >= 0.95f)
@@ -65,7 +64,7 @@ public class FadeManagerScript : MonoBehaviour {
         fadeImage.color = Color.Lerp(fadeImage.color, Color.black, blackenFactor * Time.deltaTime);
     }
 
-    void Fade()
+    public void Fade()
     {
         FadeToClear();
 

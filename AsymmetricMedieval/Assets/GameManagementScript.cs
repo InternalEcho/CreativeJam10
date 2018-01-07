@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManagementScript : MonoBehaviour {
 
     public enum StateType
     {
+        MAIN,
         GAME,
         GAMEOVER,
         END
@@ -38,7 +40,7 @@ public class GameManagementScript : MonoBehaviour {
 
     void Start()
     {
-        GoToGame();
+        GoToMain();
     }
 
     void Update()
@@ -78,10 +80,19 @@ public class GameManagementScript : MonoBehaviour {
         }
     }
 
+    void GoToMain()
+    {
+        state = StateType.MAIN;
+        SceneManager.LoadScene(0);
+        FadeManagerScript.Instance.Fade();
+        resetAll();
+
+    }
+
     void GoToGame()
     {
         state = StateType.GAME;
-        resetAll();
+        SceneManager.LoadScene(1);
     }
 
     void GoToGameOver()
