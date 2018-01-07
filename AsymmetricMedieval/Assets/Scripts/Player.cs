@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     public float playerSpeed, playerRotateSpeed, maxHp, hp;
+    public AudioClip WalkingClip;
+
+    private AudioSource walkAudio;
 
     // Use this for initialization
     void Start () {
         hp = maxHp;
-	}
+        walkAudio = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        walkAudio.clip = WalkingClip;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,6 +30,19 @@ public class Player : MonoBehaviour {
         Vector3 direction = new Vector3(x, 0f, z);
 
         this.transform.Translate(direction * playerSpeed);
+
+        if (x == 0.0 && z == 0.0)
+        {
+            walkAudio.Stop();
+        }
+        else
+        {
+            // Play audio for walking if you're moving
+            if (!walkAudio.isPlaying)
+            {
+                walkAudio.Play();
+            }
+        }
     }
 
     void Rotate()
