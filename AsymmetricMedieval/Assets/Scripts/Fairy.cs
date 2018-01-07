@@ -18,14 +18,14 @@ public class Fairy : MonoBehaviour {
     void move()
     {
         Vector3 temp = Input.mousePosition;
-        temp.z = 2f; // Set this to be the distance you want the object to be placed in front of the camera.
+        temp.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.
         this.transform.position = Camera.main.ScreenToWorldPoint(temp);
     }
 
     void turnToMouse()
     {
         Vector3 position = transform.position;
-        position.z += 30;
+        position.z -=30;
 
         Plane ground = new Plane(Vector3.forward, position);
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
