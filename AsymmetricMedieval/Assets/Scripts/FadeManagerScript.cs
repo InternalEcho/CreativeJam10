@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class FadeManagerScript : MonoBehaviour {
@@ -9,7 +10,9 @@ public class FadeManagerScript : MonoBehaviour {
 
     public Image fadeImage;
     public float fadeFactor;
-    private bool flag;
+    public float blackenFactor;
+    private bool flagClear, flagBlack;
+    private bool toBlackOver;
 
     private void Awake()
     {
@@ -26,13 +29,40 @@ public class FadeManagerScript : MonoBehaviour {
 
     void Start()
     {
-        flag = true;
+        flagClear = true;
+        flagBlack = false;
+
+        toBlackOver = false;
     }
 
     void Update()
     {
-        if (flag)
-          Fade();
+        if (flagClear)
+            Fade();
+        else if (flagBlack)
+        {
+            fadeImage.enabled = true;
+            Blacken();
+        }
+    }
+
+    void Blacken()
+    {
+        FadeToBlack();
+        if (fadeImage.color.a >= 0.95f)
+        {
+            toBlackOver = true;
+            Debug.Log("ToblackOver");
+            fadeImage.color = Color.black;
+            flagBlack = false;
+            Debug.Log("Loading game!");
+            SceneManager.LoadScene(1); //HARDCODE
+        }
+    }
+
+    void FadeToBlack()
+    {
+        fadeImage.color = Color.Lerp(fadeImage.color, Color.black, blackenFactor * Time.deltaTime);
     }
 
     void Fade()
@@ -43,12 +73,18 @@ public class FadeManagerScript : MonoBehaviour {
         {
             fadeImage.color = Color.clear;
             fadeImage.enabled = false;
-            flag = false;
+            flagClear = false;
         }
+
     }
 
     void FadeToClear()
     {
         fadeImage.color = Color.Lerp(fadeImage.color, Color.clear, fadeFactor * Time.deltaTime);
+    }
+
+    public void PlayTheGame()
+    {
+        flagBlack = true;
     }
 }
