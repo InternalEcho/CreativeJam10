@@ -49,6 +49,9 @@ public class Torchelight : MonoBehaviour {
     {
         if ((Player.transform.position - this.transform.position).sqrMagnitude < 5 * 3)
         {
+            Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude);
+            Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude < 15);
+            Debug.Log("is near!");
             // Set the torch to on
             IntensityLight = MaxLightIntensity;
             // Play fire cracking sound
@@ -56,6 +59,12 @@ public class Torchelight : MonoBehaviour {
 
             return true;
         }
-        return false;
+        else
+        {
+            Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude);
+            Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude < 15);
+
+            return false;
+        }
     }
 }

@@ -14,6 +14,7 @@ public class Fairy : MonoBehaviour {
     void Update () {
         turnToMouse();
         move();
+        interactObject();
     }
 
     void move()
@@ -37,5 +38,22 @@ public class Fairy : MonoBehaviour {
             transform.LookAt(pointToLook);
         }
         //Debug.DrawLine(cameraRay.origin, cameraRay.GetPoint(rayLength), Color.black);
+    }
+
+    void interactObject()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(this.transform.position, this.transform.forward, out hit)){
+            //Debug.Log(hit.transform.name);
+            if(hit.transform.name == "Trap Deactivator")
+            {
+                hit.transform.GetComponent<TrapDeactivator>().highlight();
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    hit.transform.GetComponent<TrapDeactivator>().disableTrap();
+                }
+            }
+        }
+
     }
 }

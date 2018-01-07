@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class PlayButton : MonoBehaviour {
 
-	public void GoToGame (int sceneIndex)
+	public void GoToGameButton ()
     {
-        SceneManager.LoadScene(sceneIndex);
+        GameManagementScript.Instance.GoToGame();
     }
     
 }

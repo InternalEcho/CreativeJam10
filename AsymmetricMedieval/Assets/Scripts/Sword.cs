@@ -4,18 +4,72 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    private bool canAttack;
+    public GameObject displaySword;
+
+    public AudioClip slashingSound;
+    public AudioClip stabbingSound;
+    private AudioSource slashingSource;
+    private AudioSource stabbingSource;
+
+    // Use this for initialization
+    void Start () {
+        canAttack = true;
+        displaySword.transform.GetComponent<Renderer>().enabled = true;
+        this.gameObject.transform.GetChild(0).gameObject.transform.GetComponent<Renderer>().enabled = false;
+        slashingSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        slashingSource.clip = slashingSound;
+        stabbingSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        stabbingSource.clip = stabbingSound;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        Stab();
-        HorizontalSwing();
+        Attack();
 	}
+    
+    void Attack()
+    {
+        if (Input.GetButtonDown("Fire1") && canAttack)
+        {
+            canAttack = false;
+            int randomAttack = Random.Range(0, 3);
+            StartCoroutine(AttackAnimation(randomAttack));
+        }
+    }
+    
+    private IEnumerator AttackAnimation(int randomAttack)
+    {
+        displaySword.transform.GetComponent<Renderer>().enabled = false;
+        this.gameObject.transform.GetChild(0).gameObject.transform.GetComponent<Renderer>().enabled = true;
 
-    void Stab()
+        switch (randomAttack)   // 0 = stab, 1 = horizontal swing, 2 = diagonal swing
+        {
+            case 0:
+                this.GetComponent<Animator>().SetTrigger("Stab");
+                yield return new WaitForSeconds(0.5f);
+                stabbingSource.Play();
+                break;
+            case 1:
+                this.GetComponent<Animator>().SetTrigger("HorizontalSwing");
+                yield return new WaitForSeconds(0.5f);
+                slashingSource.Play();
+                break;
+            case 2:
+                this.GetComponent<Animator>().SetTrigger("DiagonalSwing");
+                yield return new WaitForSeconds(0.5f);
+                slashingSource.Play();
+                break;
+            default:
+                break;
+        }
+        yield return new WaitForSeconds(1.5f);
+        displaySword.transform.GetComponent<Renderer>().enabled = true;
+        this.gameObject.transform.GetChild(0).gameObject.transform.GetComponent<Renderer>().enabled = false;
+        canAttack = true;
+    }
+
+    /*void Stab()
     {
         if (Input.GetButtonDown("Fire1"))
         {
@@ -24,14 +78,14 @@ public class Sword : MonoBehaviour {
         }
     }
 
-    /*void VerticalSwing()
+    void VerticalSwing()
     {
         if (Input.GetButtonDown("Fire2"))
         {
             Debug.Log("Vertical Swing");   //Debug
             this.GetComponent<Animator>().SetTrigger("VerticalSwing");
         }
-    }*/
+    }
 
     void HorizontalSwing()
     {
@@ -52,7 +106,7 @@ public class Sword : MonoBehaviour {
 //			Debug.Log ("Hit!");
 //			collision.gameObject.GetComponent<Enemy>().loseHP();
 //		}
-//	}
+//	}*/
 
 	void OnTriggerEnter(Collider collision){
 		Debug.Log ("Collision!");

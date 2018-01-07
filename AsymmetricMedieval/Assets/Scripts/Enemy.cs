@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	public float maxDistance;
+    public float enemySpeed;
 	public GameObject player;
 
 	public RaycastHit hit;
@@ -27,13 +28,17 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void CheckifObstacle(){
-		Physics.Raycast(transform.position, playerdirection(), out target, maxDistance);
+		Physics.Raycast(transform.position + this.transform.forward * 5, playerdirection(), out target, maxDistance);
 	}
 
 	public void DetectPlayer(){
 		CheckifObstacle ();
-		if (target.transform.CompareTag ("Player")) {
-			//Debug.Log ("work");
+        //Debug.Log(target.transform.name);
+		if (target.transform.CompareTag ("Player") && !canMove) {
+			Debug.Log ("work");
+            this.GetComponent<AudioSource>().Play();
+            this.GetComponent<Animator>().SetBool("CanMove", true);
+			canMove = true;
 			if (Vector3.SqrMagnitude (player.transform.position - transform.position) < jumpDistance) {
 				inDamageRange = true;
 				canMove = false;
@@ -49,14 +54,16 @@ public class Enemy : MonoBehaviour {
 
 	void OnDrawGizmos(){
 		Gizmos.color = Color.cyan;
-		Gizmos.DrawRay (transform.position, playerdirection ());
+		Gizmos.DrawRay (transform.position + this.transform.forward * 5, transform.forward);
 	}
 
 	void move(){
 		//rotate first.
 		transform.LookAt(player.transform);
 		//move.
-		transform.Translate(Vector3.Project(playerdirection().normalized, transform.forward) * Time.deltaTime, Space.World);
+        Vector3 direction = playerdirection();
+        direction.y = 0;
+		transform.Translate(direction.normalized * enemySpeed, Space.World);
 
 	}
 
