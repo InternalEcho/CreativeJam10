@@ -41,4 +41,12 @@ public class Player : MonoBehaviour {
             GameManager.Instance.GoToPostGame();
         }
     }
+
+    public void LoseHp()
+    {
+        if (hp >= 1)
+        {
+            hp--;
+        }
+    }
 }
