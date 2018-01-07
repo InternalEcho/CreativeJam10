@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour {
 
 	public int health;
 	public int healthIncrement;
+	public bool hasDied;
 
 	public Vector3 playerdirection(){
 		Vector3 direction = player.transform.position - transform.position;
@@ -31,7 +32,7 @@ public class Enemy : MonoBehaviour {
 	public void DetectPlayer(){
 		CheckifObstacle ();
 		if (target.transform.CompareTag ("Player")) {
-			Debug.Log ("work");
+			//Debug.Log ("work");
 			if (Vector3.SqrMagnitude (player.transform.position - transform.position) < jumpDistance) {
 				inDamageRange = true;
 				canMove = false;
@@ -41,16 +42,8 @@ public class Enemy : MonoBehaviour {
 			}
 			seeWallOnce = false;
 		} else if (target.collider.gameObject.layer == 8) {
-			if(!seeWallOnce)
-				StartCoroutine(AttentionSpan ());
 			canMove = false;
 		}
-	}
-
-	IEnumerator AttentionSpan(){
-		canMove = true;
-		yield return new WaitForSeconds (2.0f);
-		seeWallOnce = true;
 	}
 
 	void OnDrawGizmos(){
@@ -62,7 +55,7 @@ public class Enemy : MonoBehaviour {
 		//rotate first.
 		transform.LookAt(player.transform);
 		//move.
-		transform.Translate(playerdirection().normalized * Time.deltaTime, Space.World);
+		transform.Translate(Vector3.Project(playerdirection().normalized, transform.forward) * Time.deltaTime, Space.World);
 
 	}
 		
@@ -75,8 +68,9 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void checkHP(){
-		if(health =< 0){
-			Object.Destroy(this.gameObject, 0.0f);
+		if(health <= 0){
+			hasDied = true;
+			Object.Destroy(this.gameObject, 5.0f);
 			//Instantiate(
 		}
 	}
@@ -85,12 +79,13 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		seeWallOnce = true;
 		inDamageRange = false;
+		hasDied = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-
+		checkHP ();
 		DetectPlayer ();
 		if(canMove){
 			move();
@@ -101,6 +96,6 @@ public class Enemy : MonoBehaviour {
 	void animate(){
 		animator.SetBool("walk", canMove);
 		animator.SetBool("jump", inDamageRange);
-		//animator.SetBool ("die", hasDied);
+		animator.SetBool ("die", hasDied);
 	}
 }

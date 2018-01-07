@@ -41,4 +41,16 @@ public class Sword : MonoBehaviour {
             this.GetComponent<Animator>().SetTrigger("HorizontalSwing");
         }
     }
+
+	void OnCollisionEnter(Collision collision){
+		foreach (ContactPoint contact in collision.contacts)
+		{
+			Debug.DrawRay(contact.point, contact.normal, Color.white);
+		}
+		Debug.Log ("Collision!");
+		if (collision.gameObject.CompareTag("Enemy")){
+			Debug.Log ("Hit!");
+			collision.gameObject.GetComponent<Enemy>().loseHP();
+		}
+	}
 }

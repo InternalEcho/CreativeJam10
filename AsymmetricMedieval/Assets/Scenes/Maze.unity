@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -535,6 +535,16 @@ Prefab:
     - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
         type: 2}
       propertyPath: playerRotateSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 136586383760865250, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54647648513140674, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3453,6 +3463,63 @@ Transform:
   m_PrefabParentObject: {fileID: 4896852696573052, guid: 72abc8b1c4cabe34abe3fe9450f7b5e7,
     type: 2}
   m_PrefabInternal: {fileID: 676019168}
+--- !u!1001 &746223348
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4386491239341922, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -10.321
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386491239341922, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386491239341922, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 17.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386491239341922, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386491239341922, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386491239341922, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386491239341922, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386491239341922, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114132152442049350, guid: ff095df22215b491c9d13b3cc3af35f9,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 146468768}
+    - target: {fileID: 1113977838725000, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+      propertyPath: m_Name
+      value: Goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 54851238182429222, guid: ff095df22215b491c9d13b3cc3af35f9,
+        type: 2}
+      propertyPath: m_Mass
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 54851238182429222, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: ff095df22215b491c9d13b3cc3af35f9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &749118927
 Prefab:
   m_ObjectHideFlags: 0
@@ -6163,6 +6230,26 @@ Transform:
   m_PrefabParentObject: {fileID: 4267458875457982, guid: bd7e5b2a09e58a74382f141675be1a5b,
     type: 2}
   m_PrefabInternal: {fileID: 1474711368}
+--- !u!1 &1477443554 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1888041547524796, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+    type: 2}
+  m_PrefabInternal: {fileID: 62364189}
+--- !u!54 &1477443562
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1477443554}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1489894859
 Prefab:
   m_ObjectHideFlags: 0
