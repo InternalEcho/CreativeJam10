@@ -69,6 +69,10 @@ public class FadeManagerScript : MonoBehaviour {
                 fadeImage.enabled = false;
                 GameManagementScript.Instance.GoToGameOver();
             }
+            else if (GameManagementScript.Instance.state == GameManagementScript.StateType.VICTORY)
+            {
+            //    fadeImage.enabled = false;
+            }
         }
     }
 

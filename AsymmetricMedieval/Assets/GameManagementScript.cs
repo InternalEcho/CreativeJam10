@@ -12,7 +12,7 @@ public class GameManagementScript : MonoBehaviour {
         GAME,
         DEAD,
         GAMEOVER,
-        END
+        VICTORY
     };
 
     [Header("Game Logic")]
@@ -24,6 +24,7 @@ public class GameManagementScript : MonoBehaviour {
     public Image heart2;
     public GameObject gameOverScreen;
     public Text gameOverText;
+    public Text victoryText;
     public GameObject endButtons;
 
     public static GameManagementScript Instance { get; private set; }
@@ -77,11 +78,8 @@ public class GameManagementScript : MonoBehaviour {
                 break;
             
             case StateType.DEAD :
-
                 break;
 
-            case StateType.END :
-                break;
 
             default :
                 break;
@@ -135,6 +133,7 @@ public class GameManagementScript : MonoBehaviour {
     {
         gameOverScreen.GetComponent<Image>().enabled = true;
         gameOverText.enabled = true;
+        victoryText.enabled = false;
         yield return new WaitForSeconds(2f);
         endButtons.SetActive(true);
 
@@ -147,9 +146,36 @@ public class GameManagementScript : MonoBehaviour {
         heart2.enabled = false;
         gameOverScreen.GetComponent<Image>().enabled = false;
         gameOverText.enabled = false;
+        victoryText.enabled = false;
         endButtons.SetActive(false);
         FadeManagerScript.Instance.reset();
         StopAllCoroutines();
+    }
+
+    public IEnumerator WinnerChickenDinner()
+    {
+        state = StateType.VICTORY;
+        FadeManagerScript.Instance.flagBlack = true;
+        yield return new WaitForSeconds(6f);
+        GoToVictory();
+    }
+
+    public void GoToVictory()
+    {
+        SceneManager.LoadScene(2);
+        StartCoroutine(ShowVictory());
+    }
+
+    IEnumerator ShowVictory()
+    {
+        heart1.enabled = false;
+        heart2.enabled = false;
+        FadeManagerScript.Instance.fadeImage.enabled = false;
+        gameOverScreen.GetComponent<Image>().enabled = true;
+        gameOverText.enabled = false;
+        victoryText.enabled = true;
+        yield return new WaitForSeconds(2f);
+        endButtons.SetActive(true);
     }
 
     public void ReloadMain()
