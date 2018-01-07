@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour {
 
 	public void DetectPlayer(){
 		CheckifObstacle ();
-        Debug.Log(target.transform.name);
+        //Debug.Log(target.transform.name);
 		if (target.transform.CompareTag ("Player") && !canMove) {
 			Debug.Log ("work");
             this.GetComponent<AudioSource>().Play();
