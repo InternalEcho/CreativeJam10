@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Fairy : MonoBehaviour {
 
+    public GameObject player;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -18,16 +20,16 @@ public class Fairy : MonoBehaviour {
     void move()
     {
         Vector3 temp = Input.mousePosition;
-        temp.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.
+        temp.z = 2f;
         this.transform.position = Camera.main.ScreenToWorldPoint(temp);
     }
 
     void turnToMouse()
     {
         Vector3 position = transform.position;
-        position.z -=30;
+        position += player.transform.forward * 30;
 
-        Plane ground = new Plane(Vector3.forward, position);
+        Plane ground = new Plane(player.transform.forward, position);
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         float rayLength;
         if (ground.Raycast(cameraRay, out rayLength))
@@ -35,6 +37,6 @@ public class Fairy : MonoBehaviour {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
             transform.LookAt(pointToLook);
         }
-        Debug.DrawLine(cameraRay.origin, cameraRay.GetPoint(rayLength), Color.black);
+        //Debug.DrawLine(cameraRay.origin, cameraRay.GetPoint(rayLength), Color.black);
     }
 }
