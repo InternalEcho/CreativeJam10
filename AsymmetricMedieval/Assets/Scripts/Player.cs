@@ -50,9 +50,7 @@ public class Player : MonoBehaviour {
     {
         
         float x = Input.GetAxisRaw("Horizontal");
-        Debug.Log("x: " + x);
         float z = Input.GetAxisRaw("Vertical");
-        Debug.Log("z: " + z);
         Vector3 direction = new Vector3(x, 0f, z);
 
         this.transform.Translate(direction * playerSpeed);

@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour {
 	public int healthIncrement;
 	public bool hasDied;
 	public float damagingRate;
+    public GameObject BloodSplatter;
 
 	public Vector3 playerdirection(){
 		Vector3 direction = player.transform.position - transform.position;
@@ -83,9 +84,10 @@ public class Enemy : MonoBehaviour {
 	public void checkHP(){
 		if(health <= 0){
 			hasDied = true;
-			Object.Destroy(this.gameObject, 0.5f);
-			//Instantiate(
-		}
+            StartCoroutine(BoomBloodSplatter());
+            Object.Destroy(this.gameObject, 0.5f);
+            //Instantiate(
+        }
 	}
 
 	// Use this for initialization
@@ -114,4 +116,12 @@ public class Enemy : MonoBehaviour {
 		animator.SetBool("jump", inDamageRange);
 		animator.SetBool ("die", hasDied);
 	}
+
+    private IEnumerator BoomBloodSplatter()
+    {
+        Debug.Log("Blood splatter");
+        BloodSplatter.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        BloodSplatter.SetActive(false);
+    }
 }
