@@ -77,13 +77,13 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void loseHP(){
-		health -= healthIncrement;
+		health --;
 	}
 
 	public void checkHP(){
 		if(health <= 0){
 			hasDied = true;
-			Object.Destroy(this.gameObject, 5.0f);
+			Object.Destroy(this.gameObject, 0.5f);
 			//Instantiate(
 		}
 	}
@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour {
 		if (inDamageRange) {
 			StartCoroutine (damageRate ());
 		}
-		animate ();
+		//animate ();
 	}
 
 	void animate(){

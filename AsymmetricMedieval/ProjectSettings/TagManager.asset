@@ -8,6 +8,7 @@ TagManager:
   - EndButtons
   - sword
   - Enemy
+  - Trap
   layers:
   - Default
   - TransparentFX

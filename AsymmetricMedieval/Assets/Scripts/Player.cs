@@ -50,7 +50,9 @@ public class Player : MonoBehaviour {
     {
         
         float x = Input.GetAxisRaw("Horizontal");
+        Debug.Log("x: " + x);
         float z = Input.GetAxisRaw("Vertical");
+        Debug.Log("z: " + z);
         Vector3 direction = new Vector3(x, 0f, z);
 
         this.transform.Translate(direction * playerSpeed);
@@ -100,7 +102,7 @@ public class Player : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.name == "GoblinWalk" || collision.transform.name == "Trap")
+        if(collision.transform.tag == "Enemy" || collision.transform.tag == "Trap")
         {
             Debug.Log("goblin collision");
             LoseHp();

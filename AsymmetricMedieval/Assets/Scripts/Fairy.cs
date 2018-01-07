@@ -37,6 +37,7 @@ public class Fairy : MonoBehaviour {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
             transform.LookAt(pointToLook);
         }
+        Debug.DrawRay(transform.position, transform.forward * 1000, Color.green);
         //Debug.DrawLine(cameraRay.origin, cameraRay.GetPoint(rayLength), Color.black);
     }
 
@@ -44,7 +45,7 @@ public class Fairy : MonoBehaviour {
     {
         RaycastHit hit;
         if(Physics.Raycast(this.transform.position, this.transform.forward, out hit)){
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
             if(hit.transform.name == "Trap Deactivator")
             {
                 hit.transform.GetComponent<TrapDeactivator>().highlight();
