@@ -5,7 +5,6 @@ using UnityEngine;
 public class Fairy : MonoBehaviour {
 
     public GameObject player;
-
 	// Use this for initialization
 	void Start () {
 		
