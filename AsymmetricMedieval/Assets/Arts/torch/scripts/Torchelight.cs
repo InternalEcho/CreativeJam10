@@ -61,8 +61,8 @@ public class Torchelight : MonoBehaviour {
         }
         else
         {
-            Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude);
-            Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude < 15);
+            //Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude);
+            //Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude < 15);
 
             return false;
         }

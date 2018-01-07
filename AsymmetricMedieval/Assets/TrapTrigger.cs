@@ -15,6 +15,7 @@ public class TrapTrigger : MonoBehaviour {
     {
         if(other.tag == "Player" && trapDeactivator.GetComponent<TrapDeactivator>().trapActivated)
         {
+            Debug.Log("trap1 activated");
             trap.GetComponent<Animator>().SetTrigger("ActivateTrap");
         }
     }

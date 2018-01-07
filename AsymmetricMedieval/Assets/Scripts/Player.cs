@@ -97,4 +97,13 @@ public class Player : MonoBehaviour {
             hp--;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.name == "GoblinWalk" || collision.transform.name == "Trap")
+        {
+            Debug.Log("goblin collision");
+            LoseHp();
+        }
+    }
 }
