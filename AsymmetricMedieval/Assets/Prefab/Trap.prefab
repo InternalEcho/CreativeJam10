@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 65840455473359834}
   m_Layer: 0
   m_Name: Trap
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -513,3 +513,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trap: {fileID: 1351124831392622}
   trapDeactivator: {fileID: 1518548736136824}
+  trapSound: {fileID: 8300000, guid: dcebbe1b6747c444dbdcacdc441b10cf, type: 3}
