@@ -35,6 +35,22 @@ public class FadeManagerScript : MonoBehaviour {
           Fade();
     }
 
+    void Blacken()
+    {
+        FadeToBlack();
+        if (fadeImage.color.a >= 254f)
+        {
+            fadeImage.color = Color.clear;
+            fadeImage.enabled = false;
+            flag = false;
+        }
+    }
+
+    void FadeToBlack()
+    {
+        fadeImage.color = Color.Lerp(fadeImage.color, Color.black, fadeFactor * Time.deltaTime);
+    }
+
     void Fade()
     {
         FadeToClear();
