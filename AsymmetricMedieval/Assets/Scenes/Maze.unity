@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -451,6 +451,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: RandomAudio.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4255354664252448, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b, type: 2}
       propertyPath: m_LocalPosition.x
       value: -10.121981
@@ -536,6 +541,36 @@ Prefab:
         type: 2}
       propertyPath: playerRotateSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: WalkingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b193f6b451dd1f64aa56250398976b6e, type: 3}
+    - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: DeathClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a1bf4b9cad6ea38419eeff9106bda982, type: 3}
+    - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: RandomAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 05759a7379bca544381aacc4b1fec4d2, type: 3}
+    - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: RandomAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: e8163eae5e20a8048b4d0474aab0f907, type: 3}
+    - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: RandomAudio.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d5c7148d8917634e9c1eda910d6d56c, type: 3}
+    - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: hp
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b, type: 2}
