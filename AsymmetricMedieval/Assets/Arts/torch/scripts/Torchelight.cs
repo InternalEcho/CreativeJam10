@@ -47,7 +47,7 @@ public class Torchelight : MonoBehaviour {
 
     private bool verifyPlayerIsClose()
     {
-        if ((Player.transform.position - this.transform.position).sqrMagnitude < 5 * 3)
+        if ((Player.transform.position - this.transform.position).sqrMagnitude < 10 * 3)
         {
             Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude);
             Debug.Log((Player.transform.position - this.transform.position).sqrMagnitude < 15);
