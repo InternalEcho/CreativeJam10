@@ -47,6 +47,7 @@ public class Fairy : MonoBehaviour {
             //Debug.Log(hit.transform.name);
             if(hit.transform.name == "Trap Deactivator")
             {
+                hit.transform.GetComponent<TrapDeactivator>().highlight();
                 if (Input.GetButtonDown("Fire1"))
                 {
                     hit.transform.GetComponent<TrapDeactivator>().disableTrap();
