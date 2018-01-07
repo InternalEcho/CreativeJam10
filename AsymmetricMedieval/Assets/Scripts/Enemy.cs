@@ -11,6 +11,11 @@ public class Enemy : MonoBehaviour {
 	public RaycastHit hit;
 	public RaycastHit target;
 	public bool canMove;
+	public bool seeWallOnce;
+	public Animator animator;
+
+	public float jumpDistance;
+	public bool inDamageRange;
 
 	public Vector3 playerdirection(){
 		Vector3 direction = player.transform.position - transform.position;
@@ -29,17 +34,25 @@ public class Enemy : MonoBehaviour {
             this.GetComponent<AudioSource>().Play();
             this.GetComponent<Animator>().SetBool("CanMove", true);
 			canMove = true;
+			if (Vector3.SqrMagnitude (player.transform.position - transform.position) < jumpDistance) {
+				inDamageRange = true;
+				canMove = false;
+			} else {
+				inDamageRange = false;
+				canMove = true;
+			}
+			seeWallOnce = false;
 		} else if (target.collider.gameObject.layer == 8) {
-			AttentionSpan ();
+			if(!seeWallOnce)
+				StartCoroutine(AttentionSpan ());
 			canMove = false;
 		}
-		hit = target;
 	}
 
 	IEnumerator AttentionSpan(){
-		Debug.Log (Time.time);
-		yield return new WaitForSeconds (3.0f);
-		Debug.Log (Time.time);
+		canMove = true;
+		yield return new WaitForSeconds (2.0f);
+		seeWallOnce = true;
 	}
 
 	void OnDrawGizmos(){
@@ -50,22 +63,34 @@ public class Enemy : MonoBehaviour {
 	void move(){
 		//rotate first.
 		transform.LookAt(player.transform);
+
         //move.
         Vector3 direction = playerdirection();
         direction.y = 0;
 		transform.Translate(direction.normalized * enemySpeed, Space.World);
+
 	}
 
 	// Use this for initialization
 	void Start () {
-
+		seeWallOnce = true;
+		inDamageRange = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
+
+
 		DetectPlayer ();
 		if(canMove){
 			move();
-		}	
+		}
+		animate ();
+	}
+
+	void animate(){
+		animator.SetBool("walk", canMove);
+		animator.SetBool("jump", inDamageRange);
+		//animator.SetBool ("die", hasDied);
 	}
 }
