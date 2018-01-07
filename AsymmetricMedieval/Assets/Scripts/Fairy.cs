@@ -44,10 +44,13 @@ public class Fairy : MonoBehaviour {
     {
         RaycastHit hit;
         if(Physics.Raycast(this.transform.position, this.transform.forward, out hit)){
-            Debug.Log(hit.transform.name);
-            if(hit.transform.name == "something")
+            //Debug.Log(hit.transform.name);
+            if(hit.transform.name == "Trap Deactivator")
             {
-                hit.transform.GetComponent<fairyInteractionTest>().test();
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    hit.transform.GetComponent<TrapDeactivator>().disableTrap();
+                }
             }
         }
 
