@@ -19,7 +19,7 @@ public class BeginCamSlide : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (myCam.position.x <= -49.86f)
+        if (myCam.position.x <= -49.8f)
         {
             myCam.position = Vector3.Lerp(myCam.position, finalPos, 0.8f * Time.deltaTime);
         }

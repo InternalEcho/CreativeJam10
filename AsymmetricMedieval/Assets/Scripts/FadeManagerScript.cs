@@ -8,10 +8,8 @@ public class FadeManagerScript : MonoBehaviour {
     public static FadeManagerScript Instance { get; set; }
 
     public Image fadeImage;
-    private bool isInTransition;
-    private float transition;
-    private bool isShowing;
-    private float duration;
+    public float fadeFactor;
+    private bool flag;
 
     private void Awake()
     {
@@ -28,41 +26,29 @@ public class FadeManagerScript : MonoBehaviour {
 
     void Start()
     {
-        Fade(false, 2f); // false = hide , true = show
+        flag = true;
     }
 
-    public void Fade (bool showing, float duration)
+    void Update()
     {
-        isShowing = showing;
-        isInTransition = true;
-        this.duration = duration;
-        transition = (isShowing) ? 0 : 1; //isShowing false == 0, isShowing true == 1
+        if (flag)
+          Fade();
     }
 
-    void FixedUpdate()
+    void Fade()
     {
-        if (!isInTransition)
-            return;
-        if (transition > 1 || transition < 0)
-            isInTransition = false;
+        FadeToClear();
 
-        if (fadeImage.color.a == 0)
+        if (fadeImage.color.a <= 0.1f)
         {
+            fadeImage.color = Color.clear;
             fadeImage.enabled = false;
+            flag = false;
         }
     }
 
-    void FadeBlackToTransparent()
+    void FadeToClear()
     {
-
-        if (!isInTransition)
-            return;
-
-        transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
-        fadeImage.color = new Color(1f, 1f, 1f, 1f);
-        // fadeImage.GetComponent<Image>().color = Color.Lerp(new Color(0f,0f,0f,0f), new Color(0f,0f,0f,255f) , transition);
-        Debug.Log(fadeImage.color.r + " " + fadeImage.color.g + " " + fadeImage.color.b + " " + fadeImage.color.a + " ");
-        // Debug.Log(fadeImage.color.a);
-
+        fadeImage.color = Color.Lerp(fadeImage.color, Color.clear, fadeFactor * Time.deltaTime);
     }
 }
