@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     public float playerSpeed, playerRotateSpeed, maxHp, hp;
-    public AudioClip WalkingClip;
+    public AudioClip WalkingClip, DeathClip;
 
     private AudioSource walkAudio;
+    private AudioSource deathAudio;
 
     // Use this for initialization
     void Start () {
         hp = maxHp;
         walkAudio = (gameObject.AddComponent<AudioSource>() as AudioSource);
         walkAudio.clip = WalkingClip;
+        deathAudio = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        deathAudio.clip = DeathClip;
     }
 	
 	// Update is called once per frame
@@ -56,6 +59,7 @@ public class Player : MonoBehaviour {
     {
         if (hp <= 0)
         {
+            deathAudio.Play();
             GameManager.Instance.GoToPostGame();
         }
     }
