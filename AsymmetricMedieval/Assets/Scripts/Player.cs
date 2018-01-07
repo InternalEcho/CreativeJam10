@@ -17,10 +17,13 @@ public class Player : MonoBehaviour {
 
     void Move()
     {
+        
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
+        Debug.Log("x: " + x);
+        Debug.Log("z: " + z);
         Vector3 direction = new Vector3(x, 0f, z);
 
-        this.transform.Translate(direction * playerSpeed, Space.World);
+        this.transform.Translate(direction * playerSpeed);
     }
 }
