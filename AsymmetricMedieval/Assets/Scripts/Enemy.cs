@@ -87,5 +87,6 @@ public class Enemy : MonoBehaviour {
 	void animate(){
 		animator.SetBool("walk", canMove);
 		animator.SetBool("jump", inDamageRange);
+		//animator.SetBool ("die", hasDied);
 	}
 }
