@@ -6419,7 +6419,7 @@ MonoBehaviour:
   canMove: 0
   seeWallOnce: 0
   animator: {fileID: 1524406039}
-  jumpDistance: 75
+  jumpDistance: 88
   inDamageRange: 1
 --- !u!23 &1545104364
 MeshRenderer:
