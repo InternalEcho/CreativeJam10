@@ -55,6 +55,8 @@ public class FadeManagerScript : MonoBehaviour {
             Debug.Log("ToblackOver");
             fadeImage.color = Color.black;
             flagBlack = false;
+            Debug.Log("Loading game!");
+            SceneManager.LoadScene(1); //HARDCODE
         }
     }
 
@@ -84,10 +86,5 @@ public class FadeManagerScript : MonoBehaviour {
     public void PlayTheGame()
     {
         flagBlack = true;
-        if (toBlackOver == true)
-        {
-            Debug.Log("Loading game!");
-            SceneManager.LoadScene(1);
-        }
     }
 }
