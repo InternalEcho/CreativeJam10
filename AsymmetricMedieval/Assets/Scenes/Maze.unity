@@ -517,7 +517,7 @@ Prefab:
     - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
         type: 2}
       propertyPath: playerSpeed
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4967618258157538, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -526,6 +526,16 @@ Prefab:
     - target: {fileID: 1791482985285248, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: maxHp
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334083138094700, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b,
+        type: 2}
+      propertyPath: playerRotateSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc3a30385ae5f8c4faeb24cb9cc4e30b, type: 2}
